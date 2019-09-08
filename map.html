@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Map</title>
+    <link rel="stylesheet" href="ol.css" type="text/css">
+</head>
+<body>
+    <h1>Map with pins</h1>
+    <div style="width:100%; height:400px" class="map" id="map"></div>
+    <form>
+<input type="hidden" name="myLat" id="myLat"/>
+<input type="hidden" name="myLong" id="myLong"/>
+    </form>
+</body>
+<script>
+//array lat, long i marker title vrijednosti
+var markerLat = [42.443665, 42.443977968224345, 42.4427575239672];
+var markerLong = [19.249843, 19.2449818564274, 19.24385906438307];
+var markerTitle = ['primjer1', 'primjer2', 'primjer3'];
+</script>
+<script src="ol.js"></script>
+<script src="mapSetup.js"></script>
+</html>
