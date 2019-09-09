@@ -23,7 +23,12 @@ var map = new ol.Map({
 function placeMarker(myLat, myLong, title) {
 
   if (myLat.length == 0 || myLong.length == 0) {
-    console.log("Each point must contain lat and long");
+    console.log("Each point must contain lat and long!");
+    return;
+  }
+
+  if(isNaN(myLat) || isNaN(myLong) || myLat < -90 || myLat > 90 || myLong < -180 || myLat > 180){
+    console.log("You must eneter valid latitude and longitude!");
     return;
   }
 
@@ -58,7 +63,7 @@ function placeMarker(myLat, myLong, title) {
 
   if (typeof title != 'undefined') {
     //dodavanje texta na marker
-    styleMap.getText().setText(title);
+    styleMap.getText().setText(new String(title));
   }
 
   map.addLayer(markers);
