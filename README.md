@@ -40,6 +40,8 @@ var clickable = true;
 Optional:
 
 ```javascript
+clearMap();
+
 var clickable = true; //default false
 var multiple = true;  //default false
 var zoomLevel = 10;   //default 15
