@@ -1,8 +1,10 @@
+//prvi klik
+var firstClick = true;
 //za zumiranje mape
-var zoomPoint = (markerLong.length > 1 ? 15 : 17.5);
+var zoomPoint = (typeof zoomLevel != 'undefined' ? zoomLevel : 15);
 //za centar mape
-var mapCenterLat = (markerLat.length > 0 ? markerLat[0] : 42.443665);
-var mapCenterLong = (markerLong.length > 0 ? markerLong[0] : 19.249843);
+var mapCenterLat = (typeof centerLat != 'undefined' && typeof centerLong != 'undefined' ? centerLat : 42.443665);
+var mapCenterLong = (typeof centerLat != 'undefined' && typeof centerLong != 'undefined' ? centerLong : 19.249843);
 
 //setup mape
 var map = new ol.Map({
@@ -18,16 +20,18 @@ var map = new ol.Map({
   })
 });
 
-if (markerLong.length == 0 || markerLat.length == 0 || markerLat.length != markerLong.length) {
-  alert("Each point must contain lat and long");
-} else {
-  //prolazak kroz niz [lat, long, title]
-  for (var i = 0; i < markerLong.length; i++) {
-    placeMarker(markerLat[i], markerLong[i], markerTitle[i]);
-  }
-}
-
 function placeMarker(myLat, myLong, title) {
+
+  if (myLat.length == 0 || myLong.length == 0) {
+    console.log("Each point must contain lat and long");
+    return;
+  }
+
+  if (typeof multiple == 'undefined' || !multiple) {
+    var allLayers = map.getLayers().getArray();
+    if (allLayers.length > 1)
+      map.removeLayer(allLayers[allLayers.length - 1]);
+  }
 
   //stil za marker
   var styleMap = new ol.style.Style({
@@ -63,7 +67,15 @@ function placeMarker(myLat, myLong, title) {
   markers.getSource().addFeature(marker);
 }
 
+function clearMap(){
+   var allLayers = map.getLayers().getArray();
+   for(var i = allLayers.length; i > 0; i--){
+      map.removeLayer(allLayers[i]);
+   }
+}
+
 map.on('click', function (event) {
+
   if (typeof clickable == 'undefined' || !clickable)
     return false;
 
@@ -72,8 +84,7 @@ map.on('click', function (event) {
 
   //ovdje je -1 zato sto mislim da je prvi layer sama mapa
   //micem zadnji layer koji je dodat rucno
-  if (allLayers.length - 1 != markerLat.length)
-    map.removeLayer(allLayers[allLayers.length - 1]);
+  firstClick ? firstClick = false : map.removeLayer(allLayers[allLayers.length - 1]);
 
   var iconFeatureA = map.getFeaturesAtPixel(event.pixel);
   var lonlat = ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326');
@@ -85,6 +96,6 @@ map.on('click', function (event) {
     document.getElementById("myLat").value = lat;
   if (document.getElementById("myLong") != null)
     document.getElementById("myLong").value = lon;
-  alert('Lat: ' + lat + ', Long: ' + lon);
+  //alert('Lat: ' + lat + ', Long: ' + lon);
 
 });

@@ -20,6 +20,12 @@ Map display:
 <div class="map" id="map"></div>
 ```
 
+Showing pin on map:
+
+```javascript
+placeMarker(lat, long, markerTitle);
+```
+
 Placing pins on click and inserting value into inputs:
 
 ```html
@@ -31,12 +37,12 @@ var clickable = true;
 </script>
 ```
 
-Showing pins on map:
+Optional:
 
-```html
-<script>
-var markerLat = [42.443665, 42.443977968224345, 42.4427575239672];
-var markerLong = [19.249843, 19.2449818564274, 19.24385906438307];
-var markerTitle = ['primjer1', 'primjer2', 'primjer3'];
-</script>
+```javascript
+var clickable = true; //default false
+var multiple = true;  //default false
+var zoomLevel = 10;   //default 15
+var centerLat = 42.443665; //lat of map center
+var centerLong = 19.249843; //long of map center
 ```
