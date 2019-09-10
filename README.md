@@ -52,7 +52,7 @@ var centerLong = 19.249843; //long of map center
 Optional style:
 
 ```css
-var markerImage = "https://www.clubbercise.com/images/map-marker.png";
+var markerImage = "image.png";
 var markerTextOutlineWeight = 10;
 var outerTextColor = "#4cdcfb";
 var innerTextColor = "#1f181f";
