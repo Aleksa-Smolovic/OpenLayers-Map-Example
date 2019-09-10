@@ -37,7 +37,7 @@ var clickable = true;
 </script>
 ```
 
-Optional:
+Optional functions:
 
 ```javascript
 clearMap();
@@ -47,4 +47,16 @@ var multiple = true;  //default false
 var zoomLevel = 10;   //default 15
 var centerLat = 42.443665; //lat of map center
 var centerLong = 19.249843; //long of map center
+```
+
+Optional style:
+
+```css
+var markerImage = "https://www.clubbercise.com/images/map-marker.png";
+var markerTextOutlineWeight = 10;
+var outerTextColor = "#4cdcfb";
+var innerTextColor = "#1f181f";
+var markerTextSize = "20px";
+var markerTextStyle = "italic"
+var markerSize = 0.1;
 ```

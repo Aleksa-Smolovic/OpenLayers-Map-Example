@@ -5,6 +5,14 @@ var zoomPoint = (typeof zoomLevel != 'undefined' ? zoomLevel : 15);
 //za centar mape
 var mapCenterLat = (typeof centerLat != 'undefined' && typeof centerLong != 'undefined' ? centerLat : 42.443665);
 var mapCenterLong = (typeof centerLat != 'undefined' && typeof centerLong != 'undefined' ? centerLong : 19.249843);
+//za stil
+var markerSrc = (typeof markerImage != 'undefined' ? markerImage : "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Simpleicons_Places_map-marker-1.svg/768px-Simpleicons_Places_map-marker-1.svg.png");
+var textWidth = (typeof markerTextOutlineWeight != 'undefined' ? markerTextOutlineWeight : 2);
+var textColor = (typeof outerTextColor != 'undefined' ? outerTextColor : "#000");
+var textColor2 = (typeof innerTextColor != 'undefined' ? innerTextColor : '#fff');
+var textWeight = (typeof markerTextSize != 'undefined' ? markerTextSize : "11px");
+var textStyle = (typeof markerTextStyle != 'undefined' ? markerTextStyle : "bold");
+var markerScale = (typeof markerSize != 'undefined' ? markerSize : 0.03);
 
 //setup mape
 var map = new ol.Map({
@@ -27,7 +35,7 @@ function placeMarker(myLat, myLong, title) {
     return;
   }
 
-  if(isNaN(myLat) || isNaN(myLong) || myLat < -90 || myLat > 90 || myLong < -180 || myLat > 180){
+  if (isNaN(myLat) || isNaN(myLong) || myLat < -90 || myLat > 90 || myLong < -180 || myLat > 180) {
     console.log("You must eneter valid latitude and longitude!");
     return;
   }
@@ -42,17 +50,17 @@ function placeMarker(myLat, myLong, title) {
   var styleMap = new ol.style.Style({
     //u text ide stil za text nad markerom
     text: new ol.style.Text({
-      font: 'bold 11px "Open Sans", "Arial Unicode MS", "sans-serif"',
+      font: textStyle + " " + textWeight + ' "Open Sans", "Arial Unicode MS", "sans-serif"',
       placement: 'point',
-      fill: new ol.style.Fill({ color: '#fff' }),
-      stroke: new ol.style.Stroke({ color: '#000', width: 2 }),
+      fill: new ol.style.Fill({ color: textColor2 }),
+      stroke: new ol.style.Stroke({ color: textColor, width: textWidth }),
     }),
     //u image ide stil za marker
     image: new ol.style.Icon({
-      anchor: [0.5, 1],
+      anchor: [0.5, 1.45],
       //slika markera
-      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Simpleicons_Places_map-marker-1.svg/768px-Simpleicons_Places_map-marker-1.svg.png',
-      scale: 0.03,
+      src: markerSrc,
+      scale: markerScale,
     })
   });
 
@@ -72,11 +80,11 @@ function placeMarker(myLat, myLong, title) {
   markers.getSource().addFeature(marker);
 }
 
-function clearMap(){
-   var allLayers = map.getLayers().getArray();
-   for(var i = allLayers.length; i > 0; i--){
-      map.removeLayer(allLayers[i]);
-   }
+function clearMap() {
+  var allLayers = map.getLayers().getArray();
+  for (var i = allLayers.length; i > 0; i--) {
+    map.removeLayer(allLayers[i]);
+  }
 }
 
 map.on('click', function (event) {
