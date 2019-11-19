@@ -47,6 +47,12 @@ var multiple = true;  //default false
 var zoomLevel = 10;   //default 15
 var centerLat = 42.443665; //lat of map center
 var centerLong = 19.249843; //long of map center
+
+//pan to LatLng animation
+flyTo(ol.proj.transform([19.12, 42.13], 'EPSG:4326', 'EPSG:3857'), function() {});
+
+//maps in modal on toggle, also used for resizing elements
+setTimeout( function() { map.updateSize();}, 200);
 ```
 
 Optional style:
